@@ -41,7 +41,7 @@ def distance():
  
     return distance
  
-if __name__ == '__main__':
+def getDist():
     try:
         arr = []
         while True:
