@@ -1,6 +1,6 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
-from sys
+import sys
 
 # weights
 net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
