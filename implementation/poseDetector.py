@@ -1,9 +1,7 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
 import sys
-
-# weights
-net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
+import time
 
 in_width = 368
 in_height = 368
@@ -20,13 +18,18 @@ POSE_PAIRS = [ ["Neck", "RShoulder"], ["Neck", "LShoulder"], ["RShoulder", "RElb
                ["LHip", "LKnee"], ["LKnee", "LAnkle"], ["Neck", "Nose"], ["Nose", "REye"],
                ["REye", "REar"], ["Nose", "LEye"], ["LEye", "LEar"] ]
 
+# weights
+net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
 
 def checkDanger(img_path):
     """
     prints the new image with the generated skeleton
     param img_path: the string path to the image with a person in it to be processed
     """
-    is_dangerous = poseEstimator(img_path)
+    print(img_path)
+    frame = cv.imread(img_path)
+    print(frame)
+    is_dangerous = poseEstimator(frame)
     if is_dangerous is None:
         print("Not enough visual data to make a conclusion.")
     elif is_dangerous is True:
@@ -86,6 +89,8 @@ def poseEstimator(frame):
     # display image with the joints assigned
     cv.imshow('OpenPose using OpenCV', frame)
     
+    time.sleep(20)
+
     # return if the leg is up
     return proportionHelper(vitals)
 
