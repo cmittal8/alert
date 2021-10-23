@@ -1,5 +1,6 @@
 import cv2 as cv
 import matplotlib.pyplot as plt
+from sys
 
 # weights
 net = cv.dnn.readNetFromTensorflow("graph_opt.pb")
@@ -134,3 +135,11 @@ def proportionHelper(vitals):
     lift = abs(y_right - y_left)
 
     return lift > height * proportion_of_body
+
+
+def main():
+    args = sys.argv[1:]
+    checkDanger(args[0])
+
+if __name__ == "__main__":
+    main()
