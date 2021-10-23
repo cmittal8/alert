@@ -26,9 +26,9 @@ def checkDanger(img_path):
     prints the new image with the generated skeleton
     param img_path: the string path to the image with a person in it to be processed
     """
-    print(img_path)
     frame = cv.imread(img_path)
-    print(frame)
+    cv.imshow('title for pic', frame)
+
     is_dangerous = poseEstimator(frame)
     if is_dangerous is None:
         print("Not enough visual data to make a conclusion.")
@@ -88,9 +88,10 @@ def poseEstimator(frame):
 
     # display image with the joints assigned
     cv.imshow('OpenPose using OpenCV', frame)
-    
-    time.sleep(20)
 
+    cv.waitKey(0) 
+    cv.destroyAllWindows()
+    
     # return if the leg is up
     return proportionHelper(vitals)
 
@@ -135,8 +136,10 @@ def proportionHelper(vitals):
     y_top = top[1]
     y_right = extremities[0][1]
     y_left = extremities[1][1]
+    print("top_nose: " + str(top_nose) + ", top: " + str(top))
+    print("bottom_ankles: " + str(bottom_ankles) + ", right: " + str(extremities[0]) + ", left: " + str(extremities[1]))
 
-    height = max(y_top - y_right, y_top - y_left)
+    height = max(y_right - y_top, y_left - y_top)
     lift = abs(y_right - y_left)
 
     return lift > height * proportion_of_body
