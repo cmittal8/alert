@@ -2,18 +2,20 @@ import cv2
 import imutils
 import time
 
-cap = cv2.VideoCapture(0)
-ret, frame = cap.read()
 
-def takePicture():
+def takePicture(currPic):
+    cap = cv2.VideoCapture(0)
     (grabbed, frame) = cap.read()
-    showimg = frame
-    cv2.imshow('img1', showimg)  # display the captured image
-    cv2.waitKey(1)
-    time.sleep(0.3) # Wait 300 miliseconds
-    image = 'sample.jpg'
+    image = 'images/' + str((currPic) % 5) + '.jpg'
     cv2.imwrite(image, frame)
-    cap.release()
     return image
 
-print(takePicture())
+
+def takeFive():
+    arr = []
+    currPic = 0
+    for x in range(5):
+        arr.append(takePicture(currPic))
+        currPic += 1
+    return arr
+print(takeFive())

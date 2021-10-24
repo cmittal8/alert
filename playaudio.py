@@ -1,4 +1,4 @@
 
 import os
-
-os.system('mpg123 message.mp3')
+def playmessage():
+    os.system('mpg123 message.mp3')
