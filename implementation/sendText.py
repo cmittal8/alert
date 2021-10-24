@@ -5,13 +5,15 @@ Authors: Alex Hoerler, Netra Gandhi, Girish Hari, Rachel Mittal
 """
 
 import boto3
-client = boto3.client('sns')
+import os
+from cred import aws_access_key_id, aws_secret_access_key
 
 def sendMessage():
     """
     Sends a message 
     return: a string acknowledging that the message has successfully been sent
     """
+    client = boto3.client('sns', region_name='us-east-1', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
     
     topicArn = "arn:aws:sns:us-east-1:301338784186:phone-numbers"
     subject = "SOMEONE COULD NEED HELP"
@@ -20,7 +22,3 @@ def sendMessage():
 
     return "Message sent successfully"
 
-
-if __name__ == '__main__':
-
-    sendMessage()

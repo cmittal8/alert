@@ -27,16 +27,18 @@ def checkDanger(img_path):
     param img_path: the string path to the image with a person in it to be processed
     """
     frame = cv.imread(img_path)
-    cv.imshow('title for pic', frame)
+    #cv.imshow('title for pic', frame)
 
     is_dangerous = poseEstimator(frame)
     if is_dangerous is None:
-        print("Not enough visual data to make a conclusion.")
+        # print("Not enough visual data to make a conclusion.")
+        return True
     elif is_dangerous is True:
-        print("Somebody is exhibiting dangerous behavior")
+        # print("Somebody is exhibiting dangerous behavior")
+        return True
     else:
-        print("There doesn't appear to be any dangerous behavior")
-
+        # print("There doesn't appear to be any dangerous behavior")
+        return False
 
 def poseEstimator(frame):
     frame_width = frame.shape[1]
@@ -87,10 +89,10 @@ def poseEstimator(frame):
     cv.putText(frame, '%.2fms' % (t / freq), (10, 20), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
 
     # display image with the joints assigned
-    cv.imshow('OpenPose using OpenCV', frame)
+    #cv.imshow('OpenPose using OpenCV', frame)
 
-    cv.waitKey(0) 
-    cv.destroyAllWindows()
+    # cv.waitKey(0) 
+    # cv.destroyAllWindows()
     
     # return if the leg is up
     return proportionHelper(vitals)
@@ -136,8 +138,8 @@ def proportionHelper(vitals):
     y_top = top[1]
     y_right = extremities[0][1]
     y_left = extremities[1][1]
-    print("top_nose: " + str(top_nose) + ", top: " + str(top))
-    print("bottom_ankles: " + str(bottom_ankles) + ", right: " + str(extremities[0]) + ", left: " + str(extremities[1]))
+    # print("top_nose: " + str(top_nose) + ", top: " + str(top))
+    # print("bottom_ankles: " + str(bottom_ankles) + ", right: " + str(extremities[0]) + ", left: " + str(extremities[1]))
 
     height = max(y_right - y_top, y_left - y_top)
     lift = abs(y_right - y_left)

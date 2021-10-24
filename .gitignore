@@ -1,2 +1,5 @@
 .DS_Store
 secret.json
+__pycache__
+*.pyc
+cred.py

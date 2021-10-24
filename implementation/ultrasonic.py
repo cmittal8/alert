@@ -47,13 +47,14 @@ def getDist():
         while True:
             dist = distance()
             arr.append(dist)
+            #print(dist)
             if (len(arr) > 10) :
                 arr.pop(0)
-            time.sleep(0.5)
+            time.sleep(0.05)
             if(len(arr) == 10) :
                 med = statistics.median(arr)
-                print(med)
-                if med >= 2 and med <= 40:   
+                # print(med)
+                if med <= 240:   
                     print("Object sensed within the range at %.0f cm" % dist)
                     break
         
@@ -61,3 +62,7 @@ def getDist():
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+
+
+if __name__ == '__main__':
+    getDist()
