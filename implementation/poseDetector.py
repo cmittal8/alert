@@ -123,10 +123,6 @@ def proportionHelper(vitals):
     if extremities[0] is None or extremities[1] is None:
         return None
 
-    # check if some of the points have converged to 1 point
-    if distance(extremities[0], extremities[1]) < 10:
-        return None
-
     proportion_of_body = None
     if top_nose and bottom_ankles:
         proportion_of_body = 1/6
@@ -145,6 +141,10 @@ def proportionHelper(vitals):
 
     height = max(y_right - y_top, y_left - y_top)
     lift = abs(y_right - y_left)
+
+    # check if some of the points have converged to 1 point
+    if distance(extremities[0], extremities[1]) < height * 0.05:
+        return None
 
     return lift > height * proportion_of_body
 
