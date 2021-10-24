@@ -5,7 +5,7 @@ import time
 
 in_width = 368
 in_height = 368
-threshold = 0.2
+threshold = 0.4
 
 BODY_PARTS = { "Nose": 0, "Neck": 1, "RShoulder": 2, "RElbow": 3, "RWrist": 4,
                "LShoulder": 5, "LElbow": 6, "LWrist": 7, "RHip": 8, "RKnee": 9,
@@ -123,6 +123,10 @@ def proportionHelper(vitals):
     if extremities[0] is None or extremities[1] is None:
         return None
 
+    # check if some of the points have converged to 1 point
+    if distance(extremities[0], extremities[1]) < 10:
+        return None
+
     proportion_of_body = None
     if top_nose and bottom_ankles:
         proportion_of_body = 1/6
@@ -143,6 +147,9 @@ def proportionHelper(vitals):
     lift = abs(y_right - y_left)
 
     return lift > height * proportion_of_body
+
+def distance(x, y):
+    return ((x[0] - y[0])**2 + (x[1] - y[1])**2)**0.5
 
 
 def main():
