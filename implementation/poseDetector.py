@@ -136,8 +136,8 @@ def proportionHelper(vitals):
     y_top = top[1]
     y_right = extremities[0][1]
     y_left = extremities[1][1]
-    print("top_nose: " + str(top_nose) + ", top: " + str(top))
-    print("bottom_ankles: " + str(bottom_ankles) + ", right: " + str(extremities[0]) + ", left: " + str(extremities[1]))
+    # print("top_nose: " + str(top_nose) + ", top: " + str(top))
+    # print("bottom_ankles: " + str(bottom_ankles) + ", right: " + str(extremities[0]) + ", left: " + str(extremities[1]))
 
     height = max(y_right - y_top, y_left - y_top)
     lift = abs(y_right - y_left)
